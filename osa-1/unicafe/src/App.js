@@ -9,6 +9,14 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  let all = good + neutral + bad;
+  let average = 0;
+  let positive = 0;
+  if (all > 0) {
+    average = (good * 1 + neutral * 0 + bad * -1) / all;
+    positive = (good / all) * 100;
+  }
+
   const setIncrement = (buttonType) => () => {
     if (buttonType === 'good') {
       setGood(good + 1);
@@ -30,6 +38,9 @@ const App = () => {
       <p>Good {good}</p>
       <p>Neutral {neutral}</p>
       <p>Bad {bad}</p>
+      <p>All {all}</p>
+      <p>Average {average}</p>
+      <p>Positive {positive} %</p>
     </div>
   );
 };
