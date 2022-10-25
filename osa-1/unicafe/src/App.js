@@ -11,12 +11,12 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <>
         <h1>Statistics</h1>
-        <p>Good {good}</p>
-        <p>Neutral {neutral}</p>
-        <p>Bad {bad}</p>
-        <p>All {all}</p>
-        <p>Average {average}</p>
-        <p>Positive {positive} %</p>
+        <StatisticLine text="Good" value={good} />
+        <StatisticLine text="Neutral" value={neutral} />
+        <StatisticLine text="Bad" value={bad} />
+        <StatisticLine text="All" value={average} />
+        <StatisticLine text="Average" value={average} />
+        <StatisticLine text="Positive" value={positive} unit="%" />
       </>
     );
   } else {
@@ -27,6 +27,14 @@ const Statistics = ({ good, neutral, bad }) => {
       </>
     );
   }
+};
+
+const StatisticLine = ({ text, value, unit = '' }) => {
+  return (
+    <p>
+      {text} {value} {unit}
+    </p>
+  );
 };
 
 const Button = ({ handleClick, text }) => (
