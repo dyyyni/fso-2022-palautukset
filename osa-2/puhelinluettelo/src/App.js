@@ -10,6 +10,7 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
+  const [filter, setFilter] = useState('');
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -56,9 +57,29 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
+  const handleFilterChange = (event) => {
+    console.log(event.target.value);
+    setFilter(event.target.value);
+  };
+
+  const printPhoneBook = () => {
+    const filteredPhoneBook = persons.filter((person) =>
+      person.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    return filteredPhoneBook.map((person) => (
+      <Person key={person.name} person={person} />
+    ));
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        Filter with:{' '}
+        <input value={filter} onChange={handleFilterChange} />
+      </div>
+      <h2>Add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -72,9 +93,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person) => (
-        <Person key={person.name} person={person} />
-      ))}
+      {printPhoneBook()}
     </div>
   );
 };
